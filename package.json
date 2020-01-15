@@ -4,8 +4,8 @@
   "description": "Hashtagram backend as middleware",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js",
-    "start": "pm2-runtime start ecosystem.config.js --env production"
+    "test": "pm2-runtime start ecosystem.config.js --env production",
+    "start": "node index.js"
   },
   "author": "Pourab Karchaudhuri",
   "license": "ISC",
