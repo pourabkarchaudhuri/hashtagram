@@ -11,6 +11,8 @@ var scribe = require('scribe-js')()
 const app = express();
 app.use('/logs', scribe.webPanel());
 
+console.log(process.env.KEY)
+
 const PORT = 3003 || process.env.PORT;
 //Setting Up Dynamic port allocation
 
