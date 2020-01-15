@@ -13,7 +13,7 @@ app.use('/logs', scribe.webPanel());
 
 console.log(process.env.KEY)
 
-const PORT = 3003 || process.env.PORT;
+const PORT = process.env.PORT || 3000;
 //Setting Up Dynamic port allocation
 
 //Creating express object
