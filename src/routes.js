@@ -3,6 +3,7 @@ const router = express.Router();
 const hashtagsGenerated = require('./util/hashtagGenerator');
 const defaults = require('./../config/defaults');
 const objectDetectionHandler = require('./services/clarifai')
+const hashtagPopularity = require('./util/tagPopularity');
 
 /* GET Ststus Respone. */
 router.get('/health', (req, res)=>{
@@ -59,7 +60,7 @@ router.post('/dummy', async function(req, res, next) {
     })       
 });
 
-router.get('/:tag', async function(req, res, next) {
+router.get('/popularity/:tag', async function(req, res, next) {
     const _limit = req.query.limit ? req.query.limit : defaults.INSTAGRAM_DEFAULT_FIRST;
     const _recent = req.query.recent ? req.query.recent === '1' : false;
     const _hashtag = req.params.tag;
@@ -68,7 +69,10 @@ router.get('/:tag', async function(req, res, next) {
     console.log('Record Limit ' + _limit);
     console.log('Recent records ' + _recent);
 
-    res.send(await instagram(_hashtag, _limit, _recent));
+    res.send({
+        hashtag: _hashtag,
+        posts: await hashtagPopularity(_hashtag)
+    });
 });
 
 module.exports = router;

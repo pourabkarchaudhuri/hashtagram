@@ -17,6 +17,7 @@ module.exports = async function(_hashtags, _limit, _recent, callback){
             // Perform operation on file here.
             console.log('Processing key ' + keyword);
             let result = await instagram(keyword, _limit, _recent)
+            console.log(JSON.stringify(result))
             let hashtags = await hashtagCollector(result)
 
               // Do work to process file here
