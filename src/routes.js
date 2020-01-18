@@ -69,7 +69,7 @@ router.get('/popularity/:tag', async function(req, res, next) {
     console.log('Record Limit ' + _limit);
     console.log('Recent records ' + _recent);
 
-    res.send({
+    res.json({
         hashtag: _hashtag,
         posts: await hashtagPopularity(_hashtag)
     });
