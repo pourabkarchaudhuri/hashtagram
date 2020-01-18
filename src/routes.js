@@ -32,7 +32,7 @@ router.post('/predict', async function(req, res, next) {
                     topObjectsInScene : objectsDetected,
                     generatedHashtags : result
                 }
-            res.status(200).send(responsePayload);
+            res.status(200).json(responsePayload);
             })
         }
 
@@ -56,7 +56,7 @@ router.post('/dummy', async function(req, res, next) {
             topObjectsInScene : objectsDetected,
             generatedHashtags : result
         }
-        res.status(200).send(responsePayload);
+        res.status(200).json(responsePayload);
     })       
 });
 
