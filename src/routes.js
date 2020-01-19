@@ -15,7 +15,7 @@ router.get('/health', (req, res)=>{
 router.post('/predict', async function(req, res, next) {
     const _limit = req.query.limit ? req.query.limit : defaults.INSTAGRAM_DEFAULT_FIRST;
     const _recent = req.query.recent ? req.query.recent === '1' : false;
-    console.log(JSON.stringify(req.body.image))
+    console.log(JSON.stringify(req.body))
     await objectDetectionHandler(req.body.image, (error, objectsDetected)=>{
        
         if(error){
