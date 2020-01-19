@@ -15,28 +15,38 @@ router.get('/health', (req, res)=>{
 router.post('/predict', async function(req, res, next) {
     const _limit = req.query.limit ? req.query.limit : defaults.INSTAGRAM_DEFAULT_FIRST;
     const _recent = req.query.recent ? req.query.recent === '1' : false;
-    console.log(JSON.stringify(req.body))
-    await objectDetectionHandler(req.body.image, (error, objectsDetected)=>{
+    if(req.body.image === undefined ||req.body.image==undefined){
+        res.status(500).json({
+            "message":"No image string recieved"
+        })
+    }
+    else{
+        console.log(JSON.stringify(req.body.image))
+        await objectDetectionHandler(req.body.image, (error, objectsDetected)=>{
        
-        if(error){
-            res.status(500).send({
-                error: error
-            })
-        }
-        else{
-            console.log('Tag : ' + objectsDetected);
-            console.log('Record Limit : ' + _limit);
-            console.log('Recent records : ' + _recent);
-            hashtagsGenerated(objectsDetected, _limit, _recent, (result)=>{
-                let responsePayload = {
-                    topObjectsInScene : objectsDetected,
-                    generatedHashtags : result
-                }
-            res.status(200).json(responsePayload);
-            })
-        }
-
-    })
+            if(error){
+                res.status(500).send({
+                    error: error
+                })
+            }
+            else{
+                console.log('Tag : ' + objectsDetected);
+                console.log('Record Limit : ' + _limit);
+                console.log('Recent records : ' + _recent);
+                hashtagsGenerated(objectsDetected, _limit, _recent, (result)=>{
+                    let responsePayload = {
+                        topObjectsInScene : objectsDetected,
+                        generatedHashtags : result
+                    }
+                res.status(200).json(responsePayload);
+                })
+            }
+    
+        })
+    }
+    
+    
+    
        
 });
 
