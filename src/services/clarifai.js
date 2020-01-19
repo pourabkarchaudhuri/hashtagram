@@ -13,17 +13,20 @@ module.exports = async function(image, callback){
   if(url.parse(image).protocol == null || url.parse(image).protocol == 'data:'){
     //Base64
     console.log("image string")
-    console.log(base64regex.test(image))
-    if(base64regex.test(image)){
-      readyImage = {
-        base64: image
-      }
+    // console.log(base64regex.test(image))
+    // if(base64regex.test(image)){
+    //   readyImage = {
+    //     base64: image
+    //   }
+    // }
+    // else{
+    //   //Bad Base64
+    //   console.log("invalid base64")
+    //   callback('Invalid base64 format', null);
+    // } 
+    readyImage = {
+      base64: image
     }
-    else{
-      //Bad Base64
-      console.log("invalid base64")
-      callback('Invalid base64 format', null);
-    } 
   }
   else{
     //URL path
