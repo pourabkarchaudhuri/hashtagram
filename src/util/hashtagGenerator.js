@@ -8,27 +8,37 @@ module.exports = async function(_hashtags, _limit, _recent, callback){
 
         asynchrnonous.each(_hashtags, async function(keyword, callback) {
           
-            let hashtags = await hashtagHandler(keyword)
-            hashtagsGenerated.push("#"+keyword)
-             if(hashtags == null ||hashtags === null){
-                console.log("0 hashtags for " + keyword)
+          try{
+            if(keyword.split(' ').length == 1){
+              let hashtags = await hashtagHandler(keyword)
+              hashtagsGenerated.push("#"+keyword)
+              if(hashtags == null ||hashtags === null){
+                  console.log("0 hashtags for " + keyword)
+                  
+              }
+              else{
+                // Push
+                      console.log(hashtags.length + " hashtags for " + keyword)
+                      // hashtagsGenerated.push()
+                      // if(hashtags.length == 1){
+                      //   //Followup
+                      //   console.log("Followup : ",keyword)
+                      //   // let followup = await hashtagHandler(keyword)
+
+                      // }
+
+                      hashtagsGenerated.push(hashtags)
+              }
                 
-            }
-            else{
-               // Push
-                    console.log(hashtags.length + " hashtags for " + keyword)
-                    // hashtagsGenerated.push()
-                    if(hashtags.length == 1){
-                      //Followup
-                      console.log("Followup : ",keyword)
-                      // let followup = await hashtagHandler(keyword)
+                return null
 
-                    }
-
-                    hashtagsGenerated.push(hashtags)
             }
-              
-              return null
+          }
+          catch(err){
+            console.log("Error : ", err)
+          }
+          
+            
             
         }, function(err) {
             // if any of the file processing produced an error, err would equal that error
@@ -36,6 +46,7 @@ module.exports = async function(_hashtags, _limit, _recent, callback){
               // One of the iterations produced an error.
               // All processing will now stop.
               console.log('A key failed to process', err);
+
             } else {
             //   console.log("All : " + JSON.stringify(hashtagsGenerated))
               hashtagsGenerated = [].concat.apply([], hashtagsGenerated);
@@ -85,7 +96,12 @@ module.exports = async function(_hashtags, _limit, _recent, callback){
             uniqueHashtags = hashtagsGenerated.filter(function(elem, pos) {
                       return hashtagsGenerated.indexOf(elem) == pos;
                   })
-                  //Remove duplicates if any
+            //Remove duplicates if any
+
+            //Randomize
+            uniqueHashtags.sort(function(a, b){return 0.5 - Math.random()});
+            // out
+                 
             callback(uniqueHashtags)
             }
       });
