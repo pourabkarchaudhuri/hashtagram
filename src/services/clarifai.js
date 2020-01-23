@@ -39,7 +39,7 @@ module.exports = async function(image, callback){
       var concepts = response['outputs'][0]['data']['concepts']
       // console.log(JSON.stringify(concepts))
       let keywords = [];
-      for (var i=0; i<5; i++){
+      for (var i=0; i<10; i++){
         keywords.push(concepts[i].name);
       }
 

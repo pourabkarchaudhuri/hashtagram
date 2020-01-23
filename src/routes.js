@@ -25,6 +25,7 @@ router.post('/predict', async function(req, res, next) {
         await objectDetectionHandler(req.body.image, (error, objectsDetected)=>{
        
             if(error){
+                console.log(err)
                 res.status(500).send({
                     error: error
                 })
@@ -56,11 +57,14 @@ router.post('/dummy', async function(req, res, next) {
     // console.log(JSON.stringify(req.body));
 
     let objectsDetected = [
-        "woman",
-        "fashion",
-        "girl",
-        "cute",
-        "pretty"
+        "beauty",
+        "travel",
+        "man",
+        "car",
+        "pretty",
+        "mountain",
+        "river",
+        "food"
     ]
     hashtagsGenerated(objectsDetected, _limit, _recent, (result)=>{
         let responsePayload = {
