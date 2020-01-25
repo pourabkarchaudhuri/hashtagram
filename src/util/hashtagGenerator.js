@@ -9,6 +9,7 @@ module.exports = async function(_hashtags, _limit, _recent, callback){
         asynchrnonous.each(_hashtags, async function(keyword, callback) {
           
           try{
+            console.log("Current passing keyword", keyword.split(' '))
             if(keyword.split(' ').length == 1){
               let hashtags = await hashtagHandler(keyword)
               hashtagsGenerated.push("#"+keyword)

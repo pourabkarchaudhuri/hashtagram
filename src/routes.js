@@ -15,6 +15,7 @@ router.get('/health', (req, res)=>{
 router.post('/predict', async function(req, res, next) {
     const _limit = req.query.limit ? req.query.limit : defaults.INSTAGRAM_DEFAULT_FIRST;
     const _recent = req.query.recent ? req.query.recent === '1' : false;
+    // console.log(JSON.stringify(req.body));
     if(req.body.image === undefined ||req.body.image==undefined){
         res.status(500).json({
             "message":"No image string recieved"
@@ -33,6 +34,7 @@ router.post('/predict', async function(req, res, next) {
             }
             else{
                 if(req.body.locality != undefined || req.body.locality !== undefined){
+                    console.log("Location found : ", req.body.locality)
                     objectsDetected.push(req.body.locality)
                 }
                 
@@ -60,7 +62,7 @@ router.post('/predict', async function(req, res, next) {
 router.post('/dummy', async function(req, res, next) {
     const _limit = req.query.limit ? req.query.limit : defaults.INSTAGRAM_DEFAULT_FIRST;
     const _recent = req.query.recent ? req.query.recent === '1' : false;
-    // console.log(JSON.stringify(req.body));
+    console.log(JSON.stringify(req.body));
 
     let objectsDetected = [
         "beauty",
