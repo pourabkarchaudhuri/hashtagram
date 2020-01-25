@@ -22,6 +22,7 @@ router.post('/predict', async function(req, res, next) {
     }
     else{
         // console.log(JSON.stringify(req.body.image))
+        
         await objectDetectionHandler(req.body.image, (error, objectsDetected)=>{
        
             if(error){
@@ -31,7 +32,12 @@ router.post('/predict', async function(req, res, next) {
                 })
             }
             else{
+                if(req.body.locality != undefined || req.body.locality !== undefined){
+                    objectsDetected.push(req.body.locality)
+                }
+                
                 console.log('Tag : ' + objectsDetected);
+                
                 console.log('Record Limit : ' + _limit);
                 console.log('Recent records : ' + _recent);
                 hashtagsGenerated(objectsDetected, _limit, _recent, (result)=>{
@@ -66,6 +72,10 @@ router.post('/dummy', async function(req, res, next) {
         "river",
         "food"
     ]
+    // objectsDetected.push(req.body.locality);
+    if(req.body.locality != undefined || req.body.locality !== undefined){
+        objectsDetected.push(req.body.locality)
+    }
     hashtagsGenerated(objectsDetected, _limit, _recent, (result)=>{
         let responsePayload = {
             topObjectsInScene : objectsDetected,

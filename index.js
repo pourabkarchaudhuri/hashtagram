@@ -1,5 +1,6 @@
 const http = require('http');
 const express = require('express');
+const compression = require('compression')
 const cors = require('cors');
 const morgan = require('morgan');
 const fs = require('fs');
@@ -10,7 +11,7 @@ const routes = require('./src/routes');
 var scribe = require('scribe-js')()
 const app = express();
 app.use('/logs', scribe.webPanel());
-
+app.use(compression())
 // console.log(process.env.KEY)
 
 const PORT = process.env.PORT || 3000;

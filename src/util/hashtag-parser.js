@@ -21,8 +21,12 @@ module.exports = async function(payload) {
         }
         else{
           //Related hashtags present
+          
           payload.forEach((element)=>{
-            hashtagCollector.push("#"+element.node.name)
+            if(element.node.name.replace(/[^A-Za-z0-9_]/g,"").length != 0){
+              hashtagCollector.push("#"+element.node.name)
+            }
+            
           })
         }
 
