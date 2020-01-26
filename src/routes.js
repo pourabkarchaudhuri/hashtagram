@@ -35,7 +35,7 @@ router.post('/predict', async function(req, res, next) {
             else{
                 if(req.body.locality != undefined || req.body.locality !== undefined){
                     console.log("Location found : ", req.body.locality)
-                    objectsDetected.push(req.body.locality)
+                    objectsDetected.unshift(req.body.locality)
                 }
                 
                 console.log('Tag : ' + objectsDetected);
@@ -76,7 +76,7 @@ router.post('/dummy', async function(req, res, next) {
     ]
     // objectsDetected.push(req.body.locality);
     if(req.body.locality != undefined || req.body.locality !== undefined){
-        objectsDetected.push(req.body.locality)
+        objectsDetected.unshift(req.body.locality)
     }
     hashtagsGenerated(objectsDetected, _limit, _recent, (result)=>{
         let responsePayload = {
