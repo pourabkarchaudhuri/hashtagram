@@ -22,12 +22,17 @@ module.exports = async function(payload) {
         else{
           //Related hashtags present
           
-          payload.forEach((element)=>{
-            if(element.node.name.replace(/[^A-Za-z0-9_]/g,"").length != 0){
-              hashtagCollector.push("#"+element.node.name)
-            }
+          // payload.forEach((element)=>{
+          //   if(element.node.name.replace(/[^A-Za-z0-9_]/g,"").length != 0){
+          //     hashtagCollector.push("#"+element.node.name)
+          //   }
             
-          })
+          // })
+          for(var i=0; i<5; i++){
+            if(payload[i].node.name.replace(/[^A-Za-z0-9_]/g,"").length != 0){
+              hashtagCollector.push("#" + payload[i].node.name)
+            }
+          }
         }
 
         // console.log("Results -> : " + JSON.stringify(hashtagCollector));

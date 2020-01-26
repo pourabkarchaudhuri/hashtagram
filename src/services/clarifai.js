@@ -37,9 +37,9 @@ module.exports = async function(image, callback){
   app.models.predict(clarifai.GENERAL_MODEL, readyImage)
     .then(response => {
       var concepts = response['outputs'][0]['data']['concepts']
-      // console.log(JSON.stringify(concepts))
+      console.log(JSON.stringify(concepts))
       let keywords = [];
-      for (var i=0; i<concepts.length; i++){
+      for (var i=0; i<10; i++){
         keywords.push(concepts[i].name);
       }
 
