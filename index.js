@@ -5,7 +5,6 @@ const cors = require('cors');
 const morgan = require('morgan');
 const fs = require('fs');
 const bodyParser = require('body-parser');
-// var connect = require('./src/database.js');
 const routes = require('./src/routes');
 
 var scribe = require('scribe-js')()
@@ -13,7 +12,7 @@ const app = express();
 app.use('/logs', scribe.webPanel());
 app.use(compression())
 // console.log(process.env.KEY)
-
+app.use(require('express-status-monitor')())
 const PORT = process.env.PORT || 3000;
 //Setting Up Dynamic port allocation
 
@@ -30,7 +29,6 @@ app.use(scribe.express.logger());
 
 // app.use(morgan('dev'));
 //To Get Apache Log Format in Console for Handling Requests
-
 app.use(cors({
     exposedHeaders: "*"
 }));

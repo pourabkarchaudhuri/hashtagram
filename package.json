@@ -19,6 +19,7 @@
     "cors": "^2.8.5",
     "country-in-text-detector": "^1.0.10",
     "express": "^4.17.1",
+    "express-status-monitor": "^1.2.8",
     "image-to-base64": "^2.0.1",
     "lodash": "^4.17.15",
     "morgan": "^1.9.1",
